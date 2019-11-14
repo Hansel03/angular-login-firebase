@@ -12,11 +12,18 @@ import { Router } from "@angular/router";
 })
 export class LoginComponent implements OnInit {
   login: LoginModel;
+  recordarme: boolean;
 
   constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit() {
     this.login = new LoginModel();
+    this.recordarme = false;
+
+    if (localStorage.getItem("email")) {
+      this.login.email = localStorage.getItem("email");
+      this.recordarme = true;
+    }
   }
 
   public onSubmit(loginForm: NgForm) {
@@ -33,8 +40,13 @@ export class LoginComponent implements OnInit {
 
     this.auth.login(this.login).subscribe(
       response => {
-        console.log(response);
         Swal.close();
+        if (this.recordarme) {
+          localStorage.setItem("email", this.login.email);
+        } else {
+          localStorage.setItem("email", "");
+        }
+
         this.router.navigateByUrl("/home");
       },
       err => {

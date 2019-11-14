@@ -12,11 +12,13 @@ import { Router } from "@angular/router";
 })
 export class RegistroComponent implements OnInit {
   usuario: UsuarioModel;
+  recordarme: boolean;
 
   constructor(private auth: AuthService, private router: Router) {}
 
   ngOnInit() {
     this.usuario = new UsuarioModel();
+    this.recordarme = false;
   }
 
   public onSubmit(registroForm: NgForm) {
