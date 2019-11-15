@@ -22,8 +22,6 @@ export class AuthService {
     this.leerToken();
   }
 
-  logout() {}
-
   login(login: LoginModel) {
     const authData = {
       ...login,
@@ -75,5 +73,9 @@ export class AuthService {
 
   public estaAutenticado(): boolean {
     return this.userToken.length > 2;
+  }
+
+  public logout() {
+    localStorage.removeItem("token");
   }
 }
