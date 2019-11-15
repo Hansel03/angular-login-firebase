@@ -16,7 +16,7 @@ export class AuthService {
 
   private url = "https://identitytoolkit.googleapis.com/v1/accounts:";
   private apiKey = "AIzaSyCgFa-3pea8Snxj_RMpruLzYqdv1MCyvy0";
-  private userToken: string;
+  public userToken: string;
 
   constructor(private http: HttpClient) {
     this.leerToken();
@@ -71,5 +71,9 @@ export class AuthService {
     }
 
     return this.userToken;
+  }
+
+  public estaAutenticado(): boolean {
+    return this.userToken.length > 2;
   }
 }
